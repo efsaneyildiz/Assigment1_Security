@@ -20,7 +20,7 @@ import json
 
 def num_converter(n: int,radix: int):
     hex_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"][:radix]
-    
+
     if n >= 0:
         if n == 0:
             return ""
@@ -30,7 +30,24 @@ def num_converter(n: int,radix: int):
         return ""
 
 def karatsuba(x: int,y: int):
+    if (x<10) or (y<10):
+        return x*y
+    else:
+        x = str(x)
+        y = str(y)
+        # print(x[:2])
 
+        n = max(len(x),len(y))
+        n2 =int(n/2)
+        # print(n2)
+        Xhi = int(x[:n2])
+        Xlo = int(x[n2:])
+        Yhi = int(y[:n2])
+        Ylo = int(y[n2:])
+        print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
+        Z = karatsuba(Xhi,Yhi)*(10**n) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo)
+
+        return Z
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -50,7 +67,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
     radix = exercise['radix']
     x = int(exercise['x'],radix)
     y = int(exercise['y'],radix)
-    
+
     # Check type of exercise
     if exercise["type"] == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
@@ -63,7 +80,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
         elif exercise["operation"] == "multiplication_karatsuba":
            if (x<10) or (y<10):
                answer = x * y
-            
+
         elif exercise["operation"] == "extended_euclidean_algorithm":
             # Solve integer arithmetic subtraction exercise
             pass
