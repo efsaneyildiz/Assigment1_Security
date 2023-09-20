@@ -16,7 +16,8 @@
 
 # Import built-in json library for handling input/output 
 import json
-
+# from integer_arithmetic import karatsuba
+from integer_arithmetic import Ext_eucl
 
 def num_converter(n: int,radix: int):
     hex_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"][:radix]
@@ -64,12 +65,14 @@ def solve_exercise(exercise_location : str, answer_location : str):
         
 
     ### Parse and solve ###
+
     radix = exercise['radix']
     x = int(exercise['x'],radix)
     y = int(exercise['y'],radix)
+    type = exercise['type']
 
     # Check type of exercise
-    if exercise["type"] == "integer_arithmetic":
+    if type == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
             answer = x + y
@@ -79,11 +82,10 @@ def solve_exercise(exercise_location : str, answer_location : str):
             answer = x * y
         elif exercise["operation"] == "multiplication_karatsuba":
            if (x<10) or (y<10):
-               answer = x * y
+               answer = karatsuba(x,y)
 
         elif exercise["operation"] == "extended_euclidean_algorithm":
-            # Solve integer arithmetic subtraction exercise
-            pass
+            answer = Ext_eucl(x,y)
     
     else: # exercise["type"] == "modular_arithmetic"
         # Check what operation within the modular arithmetic operations we need to solve
