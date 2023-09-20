@@ -18,15 +18,28 @@
 import json
 # from integer_arithmetic import karatsuba
 from integer_arithmetic import Ext_eucl
+def to_int(number: str, radix):
+    keys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"][:radix]
+    values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15][:radix]
 
-def num_converter(n: int,radix: int):
-    hex_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"][:radix]
+    rd_dictionary = dict(zip(keys,values))
+    integer = 0
+    for i in range(1, len(number)+1):
+        n = rd_dictionary[number[-i]]                  # ith last digit incerases every iteration
+
+        power = i-1
+        integer += n * (radix ** power)
+        print(i, n, radix**i, integer)
+    return integer
+
+def to_radix(n: int,radix: int):
+    hex_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"][:radix]
 
     if n >= 0:
         if n == 0:
             return ""
         else:
-            return num_converter(n // len(hex_chars),radix) + hex_chars[n % len(hex_chars)]
+            return to_radix(n // len(hex_chars), radix) + hex_chars[n % len(hex_chars)]
     else:
         return ""
 
@@ -67,8 +80,8 @@ def solve_exercise(exercise_location : str, answer_location : str):
     ### Parse and solve ###
 
     radix = exercise['radix']
-    x = int(exercise['x'],radix)
-    y = int(exercise['y'],radix)
+    x = to_int(exercise['x'],radix)
+    y = to_int(exercise['y'],radix)
     type = exercise['type']
 
     # Check type of exercise
@@ -104,7 +117,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
             answer = x - y
    
    
-    return num_converter(answer, radix)
+    return to_radix(answer, radix)
    
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
