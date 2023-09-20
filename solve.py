@@ -18,6 +18,20 @@
 import json
 
 
+def num_converter(n: int,radix: int):
+    hex_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"][:radix]
+    
+    if n >= 0:
+        if n == 0:
+            return ""
+        else:
+            return num_converter(n // len(hex_chars),radix) + hex_chars[n % len(hex_chars)]
+    else:
+        return ""
+
+def karatsuba(x: int,y: int):
+
+
 
 def solve_exercise(exercise_location : str, answer_location : str):
     """
@@ -33,20 +47,23 @@ def solve_exercise(exercise_location : str, answer_location : str):
         
 
     ### Parse and solve ###
-    x = exercise['x']
-    y = exercise['y']
+    radix = exercise['radix']
+    x = int(exercise['x'],radix)
+    y = int(exercise['y'],radix)
+    
     # Check type of exercise
     if exercise["type"] == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
-            return x + y
+            answer = x + y
         elif exercise["operation"] == "subtraction":
-            return x - y
+            answer = x - y
         elif exercise["operation"] == "multiplication_primary":
-            return x * y
+            answer = x * y
         elif exercise["operation"] == "multiplication_karatsuba":
-            # Solve integer arithmetic subtraction exercise
-            pass
+           if (x<10) or (y<10):
+               answer = x * y
+            
         elif exercise["operation"] == "extended_euclidean_algorithm":
             # Solve integer arithmetic subtraction exercise
             pass
@@ -65,14 +82,16 @@ def solve_exercise(exercise_location : str, answer_location : str):
             pass
         
         elif exercise["operation"] == "multiplication":
-            return x - y
+            answer = x - y
    
    
-   
+    return num_converter(answer, radix)
    
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
     with open(answer_location, "w") as answer_file:
         # Serialize Python answer data (stored in answer) to JSON answer data and write it to answer_file
         json.dump(answer, answer_file, indent=4)
-    
+
+
+
