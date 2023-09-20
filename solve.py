@@ -4,14 +4,14 @@
 # solve.py
 #
 #
-# Group number:
+# Group number:18
 # group_number 
 #
 # Author names and student IDs:
-# author_name_1 (author_student_ID_1) 
-# author_name_2 (author_student_ID_2)
-# author_name_3 (author_student_ID_3)
-# author_name_4 (author_student_ID_4)
+# Deniz Ozen (1734970) 
+# Efsane Yildiz (1783777)
+# Idil Misra Yilmaz (1801511)
+# Kerem Gokce (1850407)
 ##
 
 # Import built-in json library for handling input/output 
@@ -33,25 +33,43 @@ def solve_exercise(exercise_location : str, answer_location : str):
         
 
     ### Parse and solve ###
-
+    x = exercise['x']
+    y = exercise['y']
     # Check type of exercise
     if exercise["type"] == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
-            # Solve integer arithmetic addition exercise
-            pass
+            return x + y
         elif exercise["operation"] == "subtraction":
+            return x - y
+        elif exercise["operation"] == "multiplication_primary":
+            return x * y
+        elif exercise["operation"] == "multiplication_karatsuba":
             # Solve integer arithmetic subtraction exercise
             pass
-        # et cetera
+        elif exercise["operation"] == "extended_euclidean_algorithm":
+            # Solve integer arithmetic subtraction exercise
+            pass
+    
     else: # exercise["type"] == "modular_arithmetic"
         # Check what operation within the modular arithmetic operations we need to solve
         if exercise["operation"] == "reduction":
             # Solve modular arithmetic reduction exercise
             pass
-        # et cetera
-
-
+        elif exercise['operation'] == "addition":
+            pass
+        elif exercise["operation"] == "inversion":
+            # Solve modular arithmetic reduction exercise
+            pass
+        elif exercise["operation"] == "subtraction": 
+            pass
+        
+        elif exercise["operation"] == "multiplication":
+            return x - y
+   
+   
+   
+   
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
     with open(answer_location, "w") as answer_file:
