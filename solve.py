@@ -18,9 +18,9 @@
 import json
 from integer_arithmetic import karatsuba
 from integer_arithmetic import Ext_eucl
+from integer_arithmetic import primary_mult
 from number_converters import to_int
 from number_converters import to_radix
-
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
@@ -51,9 +51,8 @@ def solve_exercise(exercise_location : str, answer_location : str):
         elif exercise["operation"] == "subtraction":
             answer = x - y
         elif exercise["operation"] == "multiplication_primary":
-            answer = x * y
+            answer = primary_mult(str(x),str(y))
         elif exercise["operation"] == "multiplication_karatsuba":
-           if (x<10) or (y<10):
                answer = karatsuba(x,y)
 
         elif exercise["operation"] == "extended_euclidean_algorithm":

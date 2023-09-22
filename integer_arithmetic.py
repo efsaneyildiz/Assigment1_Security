@@ -1,3 +1,7 @@
+import math
+import time
+
+
 def karatsuba(x: int,y: int):
     if (x<10) or (y<10):
         return x*y
@@ -31,10 +35,11 @@ def Ext_eucl(a,b):
 def primary_mult(X: str,Y: str):
     P,result = 0,0
     X = '0' + X
+
     for y in reversed(Y):
         y = int(y)
         carry= 0
-
+        number = ''
         for x in reversed(X):
             x = int(x)
             mult = (x*y) + carry
@@ -44,11 +49,30 @@ def primary_mult(X: str,Y: str):
                 carry+=mult//10
                 mult -= carry*10
                 print(mult)
-        result += mult * (10**P)
+            number = str(mult) + number
+            # print(number)
+        result += int(number) * (10**P)
         P+=1
     return result
 
-print(primary_mult('678','43'))
+def calculate_runtime(func, *args, **kwargs):
+    start_time = time.time()
+    result = func(*args, **kwargs)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    return result, elapsed_time
+
+
+
+x = str(int((3 * math.pi) * 10**24))
+y = str(int((4 * math.pi) * 10**26))
+
+
+result, elapsed_time = calculate_runtime(primary_mult, x, y)
+print(f"Result: {result}\nThe answer is {result == int(x)*int(y)}")
+print(f"Elapsed time: {elapsed_time} seconds")
+
+
 
 
 
