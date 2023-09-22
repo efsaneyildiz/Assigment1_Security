@@ -5,6 +5,7 @@ def karatsuba(x: int,y: int):
     else:
         x = str(x)
         y = str(y)
+        # print(x[:2])
 
         n = max(len(x),len(y))
         n2 =int(n/2)
@@ -17,7 +18,6 @@ def karatsuba(x: int,y: int):
         Z = karatsuba(Xhi,Yhi)*(10**n) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo)
 
         return Z
-
 
 
 def Ext_eucl(a,b):

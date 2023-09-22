@@ -16,52 +16,11 @@
 
 # Import built-in json library for handling input/output 
 import json
-# from integer_arithmetic import karatsuba
+from integer_arithmetic import karatsuba
 from integer_arithmetic import Ext_eucl
-def to_int(number: str, radix):
-    keys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"][:radix]
-    values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15][:radix]
+from number_converters import to_int
+from number_converters import to_radix
 
-    rd_dictionary = dict(zip(keys,values))
-    integer = 0
-    for i in range(1, len(number)+1):
-        n = rd_dictionary[number[-i]]                  # ith last digit incerases every iteration
-
-        power = i-1
-        integer += n * (radix ** power)
-        print(i, n, radix**i, integer)
-    return integer
-
-def to_radix(n: int,radix: int):
-    hex_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"][:radix]
-
-    if n >= 0:
-        if n == 0:
-            return ""
-        else:
-            return to_radix(n // len(hex_chars), radix) + hex_chars[n % len(hex_chars)]
-    else:
-        return ""
-
-def karatsuba(x: int,y: int):
-    if (x<10) or (y<10):
-        return x*y
-    else:
-        x = str(x)
-        y = str(y)
-        # print(x[:2])
-
-        n = max(len(x),len(y))
-        n2 =int(n/2)
-        # print(n2)
-        Xhi = int(x[:n2])
-        Xlo = int(x[n2:])
-        Yhi = int(y[:n2])
-        Ylo = int(y[n2:])
-        print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
-        Z = karatsuba(Xhi,Yhi)*(10**n) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo)
-
-        return Z
 
 
 def solve_exercise(exercise_location : str, answer_location : str):
