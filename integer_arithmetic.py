@@ -31,6 +31,7 @@ def Ext_eucl(a,b):
 
     return gcd, r, x
 
+print(Ext_eucl(161, 112))
 
 def primary_mult(X: str,Y: str):
     P,result = 0,0
@@ -71,6 +72,8 @@ y = str(int((4 * math.pi) * 10**26))
 result, elapsed_time = calculate_runtime(primary_mult, x, y)
 print(f"Result: {result}\nThe answer is {result == int(x)*int(y)}")
 print(f"Elapsed time: {elapsed_time} seconds")
+
+
 
 
 
