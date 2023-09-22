@@ -1,4 +1,3 @@
-
 def karatsuba(x: int,y: int):
     if (x<10) or (y<10):
         return x*y
@@ -19,7 +18,6 @@ def karatsuba(x: int,y: int):
 
         return Z
 
-
 def Ext_eucl(a,b):
     if a == 0:
         return b,0,1
@@ -30,7 +28,27 @@ def Ext_eucl(a,b):
     return gcd, r, x
 
 
+def primary_mult(X: str,Y: str):
+    P,result = 0,0
+    X = '0' + X
+    for y in reversed(Y):
+        y = int(y)
+        carry= 0
 
+        for x in reversed(X):
+            x = int(x)
+            mult = (x*y) + carry
+            print(f'y: {y}, x: {x}, carry: {carry}, mult: {mult}')
+            carry = 0
+            if mult >= 10:
+                carry+=mult//10
+                mult -= carry*10
+                print(mult)
+        result += mult * (10**P)
+        P+=1
+    return result
+
+print(primary_mult('678','43'))
 
 
 
