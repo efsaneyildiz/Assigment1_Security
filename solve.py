@@ -19,7 +19,7 @@ import json
 from integer_arithmetic import karatsuba
 from integer_arithmetic import Ext_eucl
 from integer_arithmetic import primary_mult
-from number_converters import to_int
+from number_converters import to_decimal
 from number_converters import to_radix
 
 
@@ -38,14 +38,14 @@ def solve_exercise(exercise_location : str, answer_location : str):
     type = exercise['type']
     operation = exercise['operation']
     radix = exercise['radix']
-    x = to_int(exercise['x'], radix)
+    x = to_decimal(exercise['x'], radix)
 
     if type == 'modulus_arithmetic':
         modulus = exercise['modulus']
         if (operation!='reduction') or (operation != 'inversion'):
-            y = to_int(exercise['y'], radix)
+            y = to_decimal(exercise['y'], radix)
     else:
-        y = to_int(exercise['y'], radix)
+        y = to_decimal(exercise['y'], radix)
 
 
 
@@ -53,18 +53,27 @@ def solve_exercise(exercise_location : str, answer_location : str):
     if type == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
-            answer = x + y
+            answer = int(x) + int(y)
             answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "subtraction":
-            answer = x - y
+            answer = int(x) - int(y)
             answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "multiplication_primary":
+            if x[0] == '-':
+                x = x[1:]
+                Negative = True
+            if y[0]=='-':
+                y = y[1:]
+                Negative = (Negative == False)
+
+
             answer = primary_mult(str(x),str(y))
             answer = {'answer': str(to_radix(answer, radix))}
 
+
         elif exercise["operation"] == "multiplication_karatsuba":
             answer = karatsuba(x,y)
-               answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "extended_euclidean_algorithm":
             a,b,gcd = Ext_eucl(x,y)
             a,b,gcd = to_radix(a,radix), to_radix(b, radix), to_radix(gcd, radix)
