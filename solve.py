@@ -53,7 +53,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
         elif exercise["operation"] == "multiplication_primary":
             answer = primary_mult(str(x),str(y))
         elif exercise["operation"] == "multiplication_karatsuba":
-               answer = karatsuba(x,y)
+            answer = karatsuba(x,y)
 
         elif exercise["operation"] == "extended_euclidean_algorithm":
             answer = Ext_eucl(x,y)
