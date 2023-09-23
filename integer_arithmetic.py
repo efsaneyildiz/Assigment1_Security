@@ -25,8 +25,8 @@ def Ext_eucl(a:int,b:int)->(int,int,int):
     if a == 0:
         return b, 1, b      #"answer-a": (b),  "answer-b": "1", "answer-gcd": (b)
 
-    result = Ext_eucl(getRemainder(b, a), a)
-    gcd, x, y = result["answer-gcd"], result["answer-a"], result["answer-b"]
+
+    gcd, x, y = Ext_eucl(getRemainder(b, a), a)
 
     new_a = y - (b//a) * x
     new_b = x
