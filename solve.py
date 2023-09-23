@@ -58,18 +58,10 @@ def solve_exercise(exercise_location : str, answer_location : str):
         elif exercise["operation"] == "subtraction":
             answer = int(x) - int(y)
             answer = {'answer': str(to_radix(answer, radix))}
+
         elif exercise["operation"] == "multiplication_primary":
-            if x[0] == '-':
-                x = x[1:]
-                Negative = True
-            if y[0]=='-':
-                y = y[1:]
-                Negative = (Negative == False)
-
-
-            answer = primary_mult(str(x),str(y))
-            answer = {'answer': str(to_radix(answer, radix))}
-
+            result = primary_mult(str(x),str(y))
+            answer = {'answer': str(to_radix(result, radix))}
 
         elif exercise["operation"] == "multiplication_karatsuba":
             answer = karatsuba(x,y)

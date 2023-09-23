@@ -36,6 +36,14 @@ def Ext_eucl(a:int,b:int)->(int,int,int):
 
 
 def primary_mult(X: str,Y: str)->int:
+    Negative = False
+    if X[0] == '-':
+        X = X[1:]
+        Negative = (Negative != True)
+    if Y[0] == '-':
+        Y = Y[1:]
+        Negative = (Negative != True)
+
     P,result = 0,0
     X = '0' + X
 
@@ -56,7 +64,9 @@ def primary_mult(X: str,Y: str)->int:
             # print(number)
         result += int(number) * (10**P)
         P+=1
-    return result
+
+    if Negative:return -1*result
+    else: return result
 
 def calculate_runtime(func, *args, **kwargs):
     start_time = time.time()
