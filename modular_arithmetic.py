@@ -66,18 +66,20 @@ def karatsuba(x: int,y: int):
 
         n = max(len(x),len(y))
         n2 =int(n/2)
+
         # print(n2)
-        Xhi = int(x[:n2])
-        Xlo = int(x[n2:])
-        Yhi = int(y[:n2])
-        Ylo = int(y[n2:])
+        Xhi = int(x)// 10**(n2)
+        Xlo = getRemainder(int(x),10)**n2
+        Yhi = int(y)//10**n2
+        Ylo = getRemainder(int(y),10)**n2
         print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
-        Z = karatsuba(Xhi,Yhi)*(10**n) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo)
+        Z = (karatsuba(Xhi,Yhi)*(10**((n2)*2)) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo))
 
         return Z
 
 def mod_multiplication(x, y, m):
     result = karatsuba(x, y)
+    print(result)
     return mod_reduction(str(result), str(m))
 # modular multiplication
-print(mod_multiplication(426, 964, 235))
+print(mod_multiplication(364, 48, 9))
