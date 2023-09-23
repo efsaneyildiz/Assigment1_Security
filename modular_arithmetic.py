@@ -53,6 +53,31 @@ def mod_inversion(x, m):
         return ''
     else:
         return getRemainder(x, m)
-
 # modular inverse
 print(mod_inversion(17, 43))
+
+def karatsuba(x: int,y: int):
+    if (x<10) or (y<10):
+        return x*y
+    else:
+        x = str(x)
+        y = str(y)
+        # print(x[:2])
+
+        n = max(len(x),len(y))
+        n2 =int(n/2)
+        # print(n2)
+        Xhi = int(x[:n2])
+        Xlo = int(x[n2:])
+        Yhi = int(y[:n2])
+        Ylo = int(y[n2:])
+        print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
+        Z = karatsuba(Xhi,Yhi)*(10**n) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo)
+
+        return Z
+
+def mod_multiplication(x, y, m):
+    result = karatsuba(x, y)
+    return mod_reduction(str(result), str(m))
+# modular multiplication
+print(mod_multiplication(426, 964, 235))
