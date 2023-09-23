@@ -34,30 +34,46 @@ def solve_exercise(exercise_location : str, answer_location : str):
     with open(exercise_location, "r") as exercise_file:
         # Deserialize JSON exercise data present in exercise_file to corresponding Python exercise data 
         exercise = json.load(exercise_file)
-        
 
-    ### Parse and solve ###
-
-    radix = exercise['radix']
-    x = to_int(exercise['x'],radix)
-    y = to_int(exercise['y'],radix)
     type = exercise['type']
+    operation = exercise['operation']
+    radix = exercise['radix']
+    x = to_int(exercise['x'], radix)
+
+    if type == 'modulus_arithmetic':
+        modulus = exercise['modulus']
+        if (operation!='reduction') or (operation != 'inversion'):
+            y = to_int(exercise['y'], radix)
+    else:
+        y = to_int(exercise['y'], radix)
+
+
 
     # Check type of exercise
     if type == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
             answer = x + y
+            answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "subtraction":
             answer = x - y
+            answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "multiplication_primary":
             answer = primary_mult(str(x),str(y))
+            answer = {'answer': str(to_radix(answer, radix))}
+
         elif exercise["operation"] == "multiplication_karatsuba":
             answer = karatsuba(x,y)
-
+               answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "extended_euclidean_algorithm":
-            answer = Ext_eucl(x,y)
-    
+            a,b,gcd = Ext_eucl(x,y)
+            a,b,gcd = to_radix(a,radix), to_radix(b, radix), to_radix(gcd, radix)
+            answer ={
+                'answer-a': str(a),
+                'answer-b': str(b),
+                'answer-gcd': str(gcd)
+                    }
+
     else: # exercise["type"] == "modular_arithmetic"
         # Check what operation within the modular arithmetic operations we need to solve
         if exercise["operation"] == "reduction":
@@ -73,15 +89,14 @@ def solve_exercise(exercise_location : str, answer_location : str):
         
         elif exercise["operation"] == "multiplication":
             answer = x - y
-   
-   
-    return to_radix(answer, radix)
-   
+            answer = {'answer': str(to_radix(answer, radix))
+                      }
+
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
     with open(answer_location, "w") as answer_file:
         # Serialize Python answer data (stored in answer) to JSON answer data and write it to answer_file
+        # os.makedirs(os.path.dirname(answer_location), exist_ok=True)
         json.dump(answer, answer_file, indent=4)
-
 
 
