@@ -2,7 +2,7 @@ def getRemainder(num, divisor):
     q = num//divisor
     num -= divisor*q
     return num
-# modular reduction
+# modulo function
 print(getRemainder(17, -3))
 print(17%-3)
 
@@ -35,6 +35,24 @@ def mod_reduction(x:str, m: str):
         return result
     else:
         return mod_reduction(str(result), org_m)
-
-
+# modular reduction
 print(mod_reduction('21811', '61'))
+
+def Ext_eucl(a,b):
+    if a == 0:
+        return b,0,1
+
+    gcd, x, y = Ext_eucl(b%a,a)
+    r = y - (b//a) * x
+
+    return gcd, r, x
+
+def mod_inversion(x, m):
+    g, x, y = Ext_eucl(x, m)
+    if g != 1:
+        return ''
+    else:
+        return getRemainder(x, m)
+
+# modular inverse
+print(mod_inversion(17, 43))
