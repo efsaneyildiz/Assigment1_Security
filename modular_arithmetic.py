@@ -36,7 +36,6 @@ def mod_reduction(x:str, m: str)->int:
     else:
         return mod_reduction(str(result), org_m)
 # modular reduction
-print(mod_reduction('21811', '61'))
 
 def Ext_eucl(a: str,b: str)->[int, int, int]:
     a_int = int(a)
@@ -57,7 +56,6 @@ def mod_inversion(x: str, m: str)->int:
     else:
         return getRemainder(x, m)
 # modular inverse
-print(mod_inversion(17, 43))
 
 def karatsuba(x: int,y: int)->int:
     if (x<10) or (y<10):
@@ -65,17 +63,15 @@ def karatsuba(x: int,y: int)->int:
     else:
         x = str(x)
         y = str(y)
-        # print(x[:2])
 
         n = max(len(x),len(y))
         n2 =int(n/2)
 
-        # print(n2)
         Xhi = int(x)// 10**(n2)
         Xlo = getRemainder(int(x),10)**n2
         Yhi = int(y)//10**n2
         Ylo = getRemainder(int(y),10)**n2
-        print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
+        # print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
         Z = (karatsuba(Xhi,Yhi)*(10**((n2)*2)) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo))
 
         return Z
@@ -85,4 +81,3 @@ def mod_multiplication(x:str, y:str, m:str):
     print(result)
     return mod_reduction(str(result),m)
 # modular multiplication
-print(mod_multiplication(364, 48, 9))
