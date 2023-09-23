@@ -3,20 +3,20 @@ def getRemainder(num: str, divisor: str)->int:
     result = int(num) - int(divisor)*int(q)
     return result
 # modulo function
-print(getRemainder(17, -3))
-print(17%-3)
+# print(getRemainder(17, -3))
+# print(17%-3)
 
 def mod_addition(x: str, y: str, m: str)->int:
     num_added = int(x) + int(y)
     return getRemainder(str(num_added), m)
 # modular addition
-print(mod_addition(12, 5, 3))
+# print(mod_addition(12, 5, 3))
 
 def mod_substraction(x: str, y: str, m: str)->int:
     num_subs = int(x) - int(y)
     return getRemainder(str(num_subs), m)
 # modular substraction
-print(mod_substraction(60, 13, 2))
+# print(mod_substraction(60, 13, 2))
 
 def mod_reduction(x:str, m: str)->int:
     x_len = len(x)
@@ -30,7 +30,7 @@ def mod_reduction(x:str, m: str)->int:
     if x_int < m_int:
         m_int //= 10
     result =  x_int - m_int
-    print(f'{x_int} - {m_int} = {result}')
+    # print(f'{x_int} - {m_int} = {result}')
     if result < int(org_m):
         return result
     else:

@@ -1,8 +1,7 @@
-import math
 import time
+from modular_arithmetic import getRemainder
 
-
-def karatsuba(x: int,y: int):
+def karatsuba(x: int,y: int)->int:
     if (x<10) or (y<10):
         return x*y
     else:
@@ -22,18 +21,21 @@ def karatsuba(x: int,y: int):
 
         return Z
 
-def Ext_eucl(a,b):
+def Ext_eucl(a:int,b:int)->(int,int,int):
     if a == 0:
-        return b,0,1
+        return b, 1, b      #"answer-a": (b),  "answer-b": "1", "answer-gcd": (b)
 
-    gcd, x, y = Ext_eucl(b%a,a)
-    r = y - (b//a) * x
+    result = Ext_eucl(getRemainder(b, a), a)
+    gcd, x, y = result["answer-gcd"], result["answer-a"], result["answer-b"]
 
-    return gcd, r, x
+    new_a = y - (b//a) * x
+    new_b = x
 
-print(Ext_eucl(161, 112))
+    return new_a, new_b, gcd     # "answer-a": (new_a), "answer-b": (new_b), "answer-gcd": gcd
 
-def primary_mult(X: str,Y: str):
+
+
+def primary_mult(X: str,Y: str)->int:
     P,result = 0,0
     X = '0' + X
 
@@ -44,12 +46,12 @@ def primary_mult(X: str,Y: str):
         for x in reversed(X):
             x = int(x)
             mult = (x*y) + carry
-            print(f'y: {y}, x: {x}, carry: {carry}, mult: {mult}')
+            # print(f'y: {y}, x: {x}, carry: {carry}, mult: {mult}')
             carry = 0
             if mult >= 10:
                 carry+=mult//10
                 mult -= carry*10
-                print(mult)
+                # print(mult)
             number = str(mult) + number
             # print(number)
         result += int(number) * (10**P)
@@ -65,13 +67,9 @@ def calculate_runtime(func, *args, **kwargs):
 
 
 
-x = str(int((3 * math.pi) * 10**24))
-y = str(int((4 * math.pi) * 10**26))
 
 
-result, elapsed_time = calculate_runtime(primary_mult, x, y)
-print(f"Result: {result}\nThe answer is {result == int(x)*int(y)}")
-print(f"Elapsed time: {elapsed_time} seconds")
+
 
 
 
