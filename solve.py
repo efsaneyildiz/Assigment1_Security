@@ -52,7 +52,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
     else:
         y = to_decimal(exercise['y'], radix)
 
-    print(f'Operation: {operation}')
+    print(f'Operation: {operation}\ntype: {type}')
 
     # Check type of exercise
     if type == "integer_arithmetic":
@@ -102,9 +102,10 @@ def solve_exercise(exercise_location : str, answer_location : str):
             answer = {'answer': str(to_radix(answer, radix))}
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
+
     with open(answer_location, "w") as answer_file:
         # os.makedirs(os.path.dirname(answer_location), exist_ok=True)
         json.dump(answer, answer_file, indent=4)
 
-    return answer
+    # return answer
 
