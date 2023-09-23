@@ -80,9 +80,9 @@ def karatsuba(x: int,y: int)->int:
 
         return Z
 
-def mod_multiplication(x, y, m):
-    result = karatsuba(x, y)
+def mod_multiplication(x:str, y:str, m:str):
+    result = karatsuba(int(x), int(y))
     print(result)
-    return mod_reduction(str(result), str(m))
+    return mod_reduction(str(result),m)
 # modular multiplication
 print(mod_multiplication(364, 48, 9))
