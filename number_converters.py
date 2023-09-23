@@ -27,6 +27,8 @@ def to_radix(n: str,radix: int)->str:
             return ""
         else:
             return to_radix(n // len(hex_chars), radix) + hex_chars[n % len(hex_chars)]
+    elif n == None:
+        return None
     else:
         n *= -1
         return '-'+to_radix(n,radix)
