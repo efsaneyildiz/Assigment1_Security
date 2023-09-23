@@ -8,7 +8,7 @@ def mod_addition(x: str, y: str, m: str)->int:
     return getRemainder(str(num_added), m)
 # modular addition
 
-def mod_substraction(x: str, y: str, m: str)->int:
+def mod_subtraction(x: str, y: str, m: str)->int:
     num_subs = int(x) - int(y)
     return getRemainder(str(num_subs), m)
 # modular substraction
