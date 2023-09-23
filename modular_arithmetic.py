@@ -1,24 +1,24 @@
-def getRemainder(num, divisor):
-    q = num//divisor
-    num -= divisor*q
-    return num
+def getRemainder(num: str, divisor: str)->int:
+    q = int(num)//int(divisor)
+    result = int(num) - int(divisor)*int(q)
+    return result
 # modulo function
 print(getRemainder(17, -3))
 print(17%-3)
 
-def mod_addition(x, y, m):
-    num_added = x + y
-    return getRemainder(num_added, m)
+def mod_addition(x: str, y: str, m: str)->int:
+    num_added = int(x) + int(y)
+    return getRemainder(str(num_added), m)
 # modular addition
 print(mod_addition(12, 5, 3))
 
-def mod_substraction(x, y, m):
-    num_subs = x - y
-    return getRemainder(num_subs, m)
+def mod_substraction(x: str, y: str, m: str)->int:
+    num_subs = int(x) - int(y)
+    return getRemainder(str(num_subs), m)
 # modular substraction
 print(mod_substraction(60, 13, 2))
 
-def mod_reduction(x:str, m: str):
+def mod_reduction(x:str, m: str)->int:
     x_len = len(x)
     m_len = len(m)
     org_m = m
@@ -38,25 +38,28 @@ def mod_reduction(x:str, m: str):
 # modular reduction
 print(mod_reduction('21811', '61'))
 
-def Ext_eucl(a,b):
-    if a == 0:
-        return b,0,1
+def Ext_eucl(a: str,b: str)->[int, int, int]:
+    a_int = int(a)
+    b_int = int(b)
+    if a_int == 0:
+        return b_int,0,1
 
-    gcd, x, y = Ext_eucl(b%a,a)
-    r = y - (b//a) * x
+    gcd, x, y = Ext_eucl(str(b_int%a_int),a)
+    r = y - (b_int//a_int) * x
 
     return gcd, r, x
 
-def mod_inversion(x, m):
+print(Ext_eucl(161, 112))
+def mod_inversion(x: str, m: str)->int:
     g, x, y = Ext_eucl(x, m)
     if g != 1:
-        return ''
+        return 0
     else:
         return getRemainder(x, m)
 # modular inverse
 print(mod_inversion(17, 43))
 
-def karatsuba(x: int,y: int):
+def karatsuba(x: int,y: int)->int:
     if (x<10) or (y<10):
         return x*y
     else:
