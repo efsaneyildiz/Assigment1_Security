@@ -18,6 +18,8 @@ def mod_reduction(x:str, m: str)->int:
     x_len = len(x)
     m_len = len(m)
     org_m = m
+    if org_m == '0':
+        return 0
     while m_len != x_len:
         m += '0'
         m_len = len(m)
