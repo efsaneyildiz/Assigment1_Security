@@ -23,7 +23,7 @@ from number_converters import to_decimal
 from number_converters import to_radix
 from modular_arithmetic import mod_inversion
 from modular_arithmetic import mod_reduction
-from modular_arithmetic import mod_substraction
+from modular_arithmetic import mod_subtraction
 from modular_arithmetic import mod_multiplication
 from modular_arithmetic import mod_addition
 
@@ -52,7 +52,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
     else:
         y = to_decimal(exercise['y'], radix)
 
-
+    print(f'Operation: {operation}')
 
     # Check type of exercise
     if type == "integer_arithmetic":
@@ -93,14 +93,13 @@ def solve_exercise(exercise_location : str, answer_location : str):
             # Solve modular arithmetic reduction exercise
             answer = mod_inversion(x, modulus)
             answer = {'answer': str(to_radix(answer, radix))}
-        elif exercise["operation"] == "subtraction": 
-            answer = mod_addition(x, y, modulus)
+        elif exercise["operation"] == "subtraction":
+            answer = mod_subtraction(x, y, modulus)
             answer = {'answer': str(to_radix(answer, radix))}
         
         elif exercise["operation"] == "multiplication":
             answer = mod_multiplication(x, y, modulus)
             answer = {'answer': str(to_radix(answer, radix))}
-
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
     with open(answer_location, "w") as answer_file:
