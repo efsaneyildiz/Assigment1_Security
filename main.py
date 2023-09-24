@@ -2,7 +2,7 @@ import json
 from solve import solve_exercise
 
 def main():
-    # Specify the exercise type (e.g., 'Simple' or 'Realistic')
+    # Specify the exercise type ('Simple' or 'Realistic')
     exercise_type = 'Simple'
 
     # Initialize counters for correct and incorrect answers
@@ -47,6 +47,7 @@ def main():
     # Print the total counts
     print(f'Total Correct Answers: {correct_count}')
     print(f'Total Incorrect Answers: {incorrect_count}')
+    print(f'Total Error: {i-(correct_count+incorrect_count)}')
 
 if __name__ == "__main__":
     main()

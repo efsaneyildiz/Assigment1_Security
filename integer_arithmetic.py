@@ -21,19 +21,27 @@ def karatsuba(x: int,y: int)->int:
 
         return Z
 
-def Ext_eucl(a:int,b:int)->(int,int,int):
+# def Ext_eucl(a:int,b:int)->(int,int,int):
+#     if a == 0:
+#         return b, 0, 1      #"answer-a": (b),  "answer-b": "1", "answer-gcd": (b)
+#
+#
+#     gcd, x, y = Ext_eucl(getRemainder(b, a), a)
+#
+#     new_a = y - (b//a) * x
+#     new_b = x
+#     # print(new_a, new_b, gcd)
+#     return new_a, new_b, gcd     # "answer-a": (new_a), "answer-b": (new_b), "answer-gcd": gcd
+def Ext_eucl(a,b):
     if a == 0:
-        return b, 1, b      #"answer-a": (b),  "answer-b": "1", "answer-gcd": (b)
+        return (0, 1, b)
 
+    x1, y1, gcd = Ext_eucl(b % a, a)
 
-    gcd, x, y = Ext_eucl(getRemainder(b, a), a)
-
-    new_a = y - (b//a) * x
-    new_b = x
-
-    return new_a, new_b, gcd     # "answer-a": (new_a), "answer-b": (new_b), "answer-gcd": gcd
-
-
+    x = y1 - (b // a) * x1
+    y = x1
+    # print(x,y,gcd)
+    return (x, y, gcd)
 
 def primary_mult(X: str,Y: str)->int:
     Negative = False
@@ -74,7 +82,6 @@ def calculate_runtime(func, *args, **kwargs):
     end_time = time.time()
     elapsed_time = end_time - start_time
     return result, elapsed_time
-
 
 
 

@@ -85,21 +85,21 @@ def solve_exercise(exercise_location : str, answer_location : str):
         if exercise["operation"] == "reduction":
             # Solve modular arithmetic reduction exercise
             answer = mod_reduction(x, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         elif exercise['operation'] == "addition":
             answer = mod_addition(x, y, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         elif exercise["operation"] == "inversion":
             # Solve modular arithmetic reduction exercise
             answer = mod_inversion(x, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         elif exercise["operation"] == "subtraction":
             answer = mod_subtraction(x, y, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         
         elif exercise["operation"] == "multiplication":
             answer = mod_multiplication(x, y, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
 
