@@ -1,9 +1,12 @@
 import json
 from solve import solve_exercise
+import sys
 
+sys.setrecursionlimit(3500)
+print(sys.getrecursionlimit())
 def main():
     # Specify the exercise type ('Simple' or 'Realistic')
-    exercise_type = 'Simple'
+    exercise_type = 'Realistic'
 
     # Initialize counters for correct and incorrect answers
     correct_count = 0
@@ -47,7 +50,7 @@ def main():
     # Print the total counts
     print(f'Total Correct Answers: {correct_count}')
     print(f'Total Incorrect Answers: {incorrect_count}')
-    print(f'Total Error: {i-(correct_count+incorrect_count)}')
+    print(f'Total Error: {i+1-(correct_count+incorrect_count)}')
 
 if __name__ == "__main__":
     main()

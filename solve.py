@@ -45,7 +45,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
     x = to_decimal(exercise['x'], radix)
 
     if type == 'modular_arithmetic':
-        modulus = exercise['modulus']
+        modulus = to_decimal(exercise['modulus'], radix)
         if (operation!='reduction') and (operation != 'inversion'):
             y = to_decimal(exercise['y'], radix)
 
