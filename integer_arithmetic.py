@@ -21,17 +21,7 @@ def karatsuba(x: int,y: int)->int:
 
         return Z
 
-# def Ext_eucl(a:int,b:int)->(int,int,int):
-#     if a == 0:
-#         return b, 0, 1      #"answer-a": (b),  "answer-b": "1", "answer-gcd": (b)
-#
-#
-#     gcd, x, y = Ext_eucl(getRemainder(b, a), a)
-#
-#     new_a = y - (b//a) * x
-#     new_b = x
-#     # print(new_a, new_b, gcd)
-#     return new_a, new_b, gcd     # "answer-a": (new_a), "answer-b": (new_b), "answer-gcd": gcd
+
 def Ext_eucl(a,b):
     if a == 0:
         return (0, 1, b)
@@ -84,14 +74,29 @@ def calculate_runtime(func, *args, **kwargs):
     return result, elapsed_time
 
 
+def addition(X: str, Y: str)->int:
+    result, sum, carry = '', 0, 0
 
+    maximum = f'0{max(int(X), int(Y))}'
+    minimum = str(min(int(X), int(Y)))
 
+    len_diff = abs(len(X) - len(Y))
+    if maximum<maximum: maximum=f"{len_diff * '0'}{maximum}"
+    else: minimum=f"{len_diff * '0'}{minimum}"
 
+    for i in range(1,len(maximum)):
+        x = maximum[-i]
+        y = minimum[-i]
+        sum = int(x)+int(y)+carry
+        carry = 0
+        if sum>=10:
+            carry =sum//10
+            sum -= carry*10
+        result = f"{sum}{result}"
+    return int(result)
 
-
-
-
-
+x,y = '73261872638162381762398', '732862756426352786497129764873647218723478'
+print(f'{int(x)+int(y) == int(addition(x,y))}\nCorrect Answer: {int(x)+int(y)}\nYour answer: {addition(x,y)}')
 
 
 

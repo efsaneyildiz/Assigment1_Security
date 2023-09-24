@@ -1,5 +1,6 @@
 import json
 from solve import solve_exercise
+import time
 import sys
 
 sys.setrecursionlimit(3500)
@@ -52,5 +53,11 @@ def main():
     print(f'Total Incorrect Answers: {incorrect_count}')
     print(f'Total Error: {i+1-(correct_count+incorrect_count)}')
 
+
 if __name__ == "__main__":
+
+    start_time = time.time()
     main()
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f'\nTotal Run Time: {elapsed_time}')

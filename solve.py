@@ -16,11 +16,12 @@
 
 # Import built-in json library for handling input/output 
 import json
+from number_converters import to_decimal
+from number_converters import to_radix
 from integer_arithmetic import karatsuba
 from integer_arithmetic import Ext_eucl
 from integer_arithmetic import primary_mult
-from number_converters import to_decimal
-from number_converters import to_radix
+from integer_arithmetic import addition
 from modular_arithmetic import mod_inversion
 from modular_arithmetic import mod_reduction
 from modular_arithmetic import mod_subtraction
@@ -58,7 +59,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
     if type == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
-            answer = int(x) + int(y)
+            answer = addition(x,y)
             answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "subtraction":
             answer = int(x) - int(y)
