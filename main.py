@@ -5,7 +5,7 @@ import time
 
 def main():
     # Specify the exercise type ('Simple' or 'Realistic')
-    exercise_type = 'Realistic'
+    exercise_type = 'Simple'
 
     # Initialize counters for correct and incorrect answers
     correct_count = 0
