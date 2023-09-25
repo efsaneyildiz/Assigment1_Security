@@ -13,8 +13,8 @@
 # Idil Misra Yilmaz (1801511)
 # Kerem Gokce (1850407)
 ##
-
-# Import built-in json library for handling input/output 
+import ctypes
+# Import built-in json library for handling input/output
 import json
 import sys
 from number_converters import to_decimal
@@ -23,12 +23,12 @@ from integer_arithmetic import karatsuba
 from integer_arithmetic import Ext_eucl
 from integer_arithmetic import primary_mult
 from integer_arithmetic import addition
+from integer_arithmetic import addition_and_subtraction
 from modular_arithmetic import mod_inversion
 from modular_arithmetic import mod_reduction
 from modular_arithmetic import mod_subtraction
 from modular_arithmetic import mod_multiplication
 from modular_arithmetic import mod_addition
-
 sys.setrecursionlimit(3500)
 print(sys.getrecursionlimit())
 
@@ -58,16 +58,17 @@ def solve_exercise(exercise_location : str, answer_location : str):
         y = to_decimal(exercise['y'], radix)
 
     print(f'Operation: {operation}\ntype: {type}')
-
     # Check type of exercise
     if type == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
-            answer = addition(x,y)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = addition_and_subtraction(x,y,'addition')
+            answer = {'answer': str(to_radix(int(answer), radix))}
+
         elif exercise["operation"] == "subtraction":
-            answer = int(x) - int(y)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = addition_and_subtraction(x,y,'subtraction')
+            print(answer)
+            answer = {'answer': str(to_radix(int(answer), radix))}
 
         elif exercise["operation"] == "multiplication_primary":
             result = primary_mult(str(x),str(y))
@@ -76,6 +77,7 @@ def solve_exercise(exercise_location : str, answer_location : str):
         elif exercise["operation"] == "multiplication_karatsuba":
             answer = karatsuba(int(x),int(y))
             answer = {'answer': str(to_radix(answer, radix))}
+
         elif exercise["operation"] == "extended_euclidean_algorithm":
             a,b,gcd = Ext_eucl(int(x),int(y))
             a,b,gcd = to_radix(a,radix), to_radix(b, radix), to_radix(gcd, radix)
