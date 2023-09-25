@@ -25,8 +25,8 @@ def mod_addition(x: str, y: str, m: str) -> int:
 
 def mod_subtraction(x: str, y: str, m: str) -> int:
     """
-    Subtracts the two integers x and y and
-    takes the modulo m of this subtraction with the getRemainder function
+    Subtracts the two integers x and y and takes the
+    modulo m of this subtraction with the getRemainder function
     """
     num_subs = int(x) - int(y)
     return getRemainder(str(num_subs), m)
