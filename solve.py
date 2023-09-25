@@ -16,6 +16,7 @@
 
 # Import built-in json library for handling input/output 
 import json
+import sys
 from number_converters import to_decimal
 from number_converters import to_radix
 from integer_arithmetic import karatsuba
@@ -27,6 +28,9 @@ from modular_arithmetic import mod_reduction
 from modular_arithmetic import mod_subtraction
 from modular_arithmetic import mod_multiplication
 from modular_arithmetic import mod_addition
+
+sys.setrecursionlimit(3500)
+print(sys.getrecursionlimit())
 
 def solve_exercise(exercise_location : str, answer_location : str):
     """

@@ -1,10 +1,8 @@
 import json
 from solve import solve_exercise
 import time
-import sys
 
-sys.setrecursionlimit(3500)
-print(sys.getrecursionlimit())
+
 def main():
     # Specify the exercise type ('Simple' or 'Realistic')
     exercise_type = 'Realistic'
