@@ -6,8 +6,17 @@ def getRemainder(num: str, divisor: str)->int:
     return result
 
 
-def karatsuba(x: int,y: int)->int:
-
+def karatsuba(x: str,y: str)->int:
+    """
+       Perform multiplication using the Karatsuba algorithm.
+       Args:
+           x (str): The first integer to be multiplied.
+           y (str): The second integer to be multiplied.
+       Returns:
+           int: The result of multiplying the two integers using the Karatsuba algorithm.
+    """
+    x = int(x)
+    y = int(y)
     if (x<10) or (y<10):
         return x*y
     else:
@@ -29,6 +38,17 @@ def karatsuba(x: int,y: int)->int:
 
 
 def Ext_eucl(a,b):
+    """
+      Extended Euclidean algorithm to find the greatest common divisor (gcd)
+      and Bézout coefficients of two integers a and b.
+      Args:
+          a: The first integer.
+          b: The second integer.
+      Returns:
+          - The Bézout coefficient x.
+          - The Bézout coefficient y.
+          - The greatest common divisor (gcd) of a and b.
+    """
     if a == 0:
         return (0, 1, b)
 
@@ -39,6 +59,14 @@ def Ext_eucl(a,b):
     return (x, y, gcd)
 
 def primary_mult(X: str,Y: str)->int:
+    """
+    Perform primary multiplication of two integers represented as strings.
+    Args:
+        X (str): The first integer in string representation.
+        Y (str): The second integer in string representation.
+    Returns:
+        int: The result of multiplying X and Y as an integer.
+    """
     Negative = False
     if X[0] == '-':
         X = X[1:]
@@ -69,6 +97,15 @@ def primary_mult(X: str,Y: str)->int:
     else: return result
 
 def calculate_runtime(func, *args, **kwargs):
+    """
+    Measure the runtime of a given function and return the result and elapsed time.
+    Args:
+        func (callable): The function to measure the runtime for.
+        *args: Positional arguments to pass to the function.
+        **kwargs: Keyword arguments to pass to the function.
+    Returns:
+        A tuple containing the result of the function and the elapsed time (in seconds).
+    """
     start_time = time.time()
     result = func(*args, **kwargs)
     end_time = time.time()
@@ -77,6 +114,16 @@ def calculate_runtime(func, *args, **kwargs):
 
 
 def subtract(x: str, y: str):
+    """
+    A function assumes that x and y are non-negative integers represented as strings.
+    It performs subtraction digit by digit, handling borrowing as needed.
+    Subtract one non-negative integer (y) from another non-negative integer (x).
+    Args:
+        x (str): The minuend (the number to subtract from).
+        y (str): The subtrahend (the number to subtract).
+    Returns:
+        str: The result of subtracting y from x as a string.
+    """
     # Base case: If y is empty, return x
     if not y:
         return x
@@ -95,7 +142,6 @@ def subtract(x: str, y: str):
             x = x[:i] + '9' + x[i + 1:]
             i -= 1
 
-
         # Subtract 1 from the previous digit
         x = x[:i] + str(int(x[i]) - 1) + x[i + 1:]
 
@@ -108,6 +154,16 @@ def subtract(x: str, y: str):
     return rest_difference + str(difference)
 
 def addition(X: str, Y: str) -> str:
+    """
+    A function assumes that X and Y are non-negative integers represented as strings.
+    It performs addition digit by digit, handling carry as needed.
+    Add two non-negative integers represented as strings.
+    Args:
+        X (str): The first non-negative integer to add.
+        Y (str): The second non-negative integer to add.
+    Returns:
+        str: The result of adding X and Y as a string.
+    """
     result, carry = '', 0
 
     max_len = max(len(X), len(Y))
@@ -127,6 +183,17 @@ def addition(X: str, Y: str) -> str:
     return result
 
 def addition_and_subtraction(X: str,Y: str, type: str):
+    """
+     A function performs addition or subtraction based on the provided type.
+    It handles both positive and negative integers.
+     Perform addition or subtraction of two integers represented as strings.
+     Args:
+        X (str): The first integer as a string.
+        Y (str): The second integer as a string.
+        type (str): The operation type ('addition' or 'subtraction').
+    Returns:
+        The result of the addition or subtraction as a string.
+    """
     negative_x = False
     negative_y = False
 
