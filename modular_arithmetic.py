@@ -14,23 +14,14 @@ def mod_subtraction(x: str, y: str, m: str)->int:
 # modular substraction
 
 def mod_reduction(x:str, m: str)->int:
-    x_len = len(x)
-    m_len = len(m)
-    org_m = m
-    if org_m == '0':
-        return None
-    while m_len != x_len:
-        m += '0'
-        m_len = len(m)
-    x_int = int(x)
     m_int = int(m)
-    if x_int < m_int:
-        m_int //= 10
-    result =  x_int - m_int
-    if result < int(org_m):
-        return result
+
+    if m_int == 0:
+        return None
     else:
-        return mod_reduction(str(result), org_m)
+     result = getRemainder(x, m)
+    return result
+
 # modular reduction
 
 def Ext_eucl(a: str,b: str)->[int, int, int]:
