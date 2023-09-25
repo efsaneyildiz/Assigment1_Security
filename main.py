@@ -2,8 +2,15 @@ import json
 from solve import solve_exercise
 import time
 
-
 def main():
+    """
+    The function expects exercise and answer files in specific directories and handles exceptions for file not found
+    or processing errors.
+    Main function to process and evaluate exercise solutions.
+
+    This function loads exercise and answer files, solves the exercises, and checks the correctness of the solutions.
+    It counts correct and incorrect answers and prints the results.
+    """
     # Specify the exercise type ('Simple' or 'Realistic')
     exercise_type = 'Realistic'
 
@@ -40,6 +47,7 @@ def main():
                 incorrect_count += 1
 
             print(f'Exercise {i} completed\n')
+
 
         except FileNotFoundError:
             print(f'Exercise {i} not found. Skipping...\n')
