@@ -81,29 +81,54 @@ def calculate_runtime(func, *args, **kwargs):
     return result, elapsed_time
 
 
-def addition(X: str, Y: str)->int:
-    result, sum, carry = '', 0, 0
+# def addition(X: str, Y: str)->int:
+#     result, sum, carry = '', 0, 0
+#
+#     maximum = f'0{max(int(X), int(Y))}'
+#     minimum = str(min(int(X), int(Y)))
+#
+#     max_len = max(len(X), len(Y))
+#     X = X.zfill(max_len)
+#     Y = Y.zfill(max_len)
+#
+#     for i in range(1,len(maximum)):
+#         x = maximum[-i]
+#         y = minimum[-i]
+#         sum = int(x)+int(y)+carry
+#         carry = 0
+#         if sum>=10:
+#             carry =sum//10
+#             sum -= carry*10
+#         result = f"{sum}{result}"
+#     return int(result)
 
-    maximum = f'0{max(int(X), int(Y))}'
-    minimum = str(min(int(X), int(Y)))
+def addition(X: str, Y: str) -> str:
+    result, carry = '', 0
 
-    len_diff = abs(len(X) - len(Y))
-    if maximum<maximum: maximum=f"{len_diff * '0'}{maximum}"
-    else: minimum=f"{len_diff * '0'}{minimum}"
+    max_len = max(len(X), len(Y))
+    X = X.zfill(max_len)
+    Y = Y.zfill(max_len)
 
-    for i in range(1,len(maximum)):
-        x = maximum[-i]
-        y = minimum[-i]
-        sum = int(x)+int(y)+carry
-        carry = 0
-        if sum>=10:
-            carry =sum//10
-            sum -= carry*10
-        result = f"{sum}{result}"
-    return int(result)
+    for i in range(max_len - 1, -1, -1):
+        x_digit = int(X[i])
+        y_digit = int(Y[i])
 
-x,y = '73261872638162381762398', '732862756426352786497129764873647218723478'
-print(f'{int(x)+int(y) == int(addition(x,y))}\nCorrect Answer: {int(x)+int(y)}\nYour answer: {addition(x,y)}')
+        digit_sum = x_digit + y_digit + carry
+        carry = digit_sum//10
+        digit_sum = getRemainder(digit_sum, 10)
+
+        result = str(digit_sum) + result
+
+    if carry:
+        result = str(carry) + result
+
+    return result
+
+
+
+# x,y = '2500', '35'
+# x,y = '8736821739281083012839018732921379812739', '0912839012736123812372830198230172391723861237'
+# print(f'{int(x)+int(y) == int(addition(x,y))}\nCorrect Answer: {int(x)+int(y)}\nYour answer: {addition(x,y)}')
 
 
 
