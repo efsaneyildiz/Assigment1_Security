@@ -16,16 +16,21 @@
 
 # Import built-in json library for handling input/output 
 import json
+import sys
+from number_converters import to_decimal
+from number_converters import to_radix
 from integer_arithmetic import karatsuba
 from integer_arithmetic import Ext_eucl
 from integer_arithmetic import primary_mult
-from number_converters import to_decimal
-from number_converters import to_radix
+from integer_arithmetic import addition
 from modular_arithmetic import mod_inversion
 from modular_arithmetic import mod_reduction
 from modular_arithmetic import mod_subtraction
 from modular_arithmetic import mod_multiplication
 from modular_arithmetic import mod_addition
+
+sys.setrecursionlimit(3500)
+print(sys.getrecursionlimit())
 
 def solve_exercise(exercise_location : str, answer_location : str):
     """
@@ -45,20 +50,20 @@ def solve_exercise(exercise_location : str, answer_location : str):
     x = to_decimal(exercise['x'], radix)
 
     if type == 'modular_arithmetic':
-        modulus = exercise['modulus']
+        modulus = to_decimal(exercise['modulus'], radix)
         if (operation!='reduction') and (operation != 'inversion'):
             y = to_decimal(exercise['y'], radix)
 
     else:
         y = to_decimal(exercise['y'], radix)
 
-    print(f'Operation: {operation}')
+    print(f'Operation: {operation}\ntype: {type}')
 
     # Check type of exercise
     if type == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if exercise["operation"] == "addition":
-            answer = int(x) + int(y)
+            answer = addition(x,y)
             answer = {'answer': str(to_radix(answer, radix))}
         elif exercise["operation"] == "subtraction":
             answer = int(x) - int(y)
@@ -85,26 +90,27 @@ def solve_exercise(exercise_location : str, answer_location : str):
         if exercise["operation"] == "reduction":
             # Solve modular arithmetic reduction exercise
             answer = mod_reduction(x, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         elif exercise['operation'] == "addition":
             answer = mod_addition(x, y, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         elif exercise["operation"] == "inversion":
             # Solve modular arithmetic reduction exercise
             answer = mod_inversion(x, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         elif exercise["operation"] == "subtraction":
             answer = mod_subtraction(x, y, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
         
         elif exercise["operation"] == "multiplication":
             answer = mod_multiplication(x, y, modulus)
-            answer = {'answer': str(to_radix(answer, radix))}
+            answer = {'answer': to_radix(answer, radix)}
     # Open file at answer_location for writing, creating the file if it does not exist yet
     # (and overwriting it if it does already exist).
+
     with open(answer_location, "w") as answer_file:
         # os.makedirs(os.path.dirname(answer_location), exist_ok=True)
         json.dump(answer, answer_file, indent=4)
 
-    return answer
+    # return answer
 
