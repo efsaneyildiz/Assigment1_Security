@@ -1,23 +1,29 @@
 import time
-from modular_arithmetic import getRemainder
+
+def getRemainder(num: str, divisor: str)->int:
+    q = int(num)//int(divisor)
+    result = int(num) - int(divisor)*int(q)
+    return result
+
 
 def karatsuba(x: int,y: int)->int:
+
     if (x<10) or (y<10):
         return x*y
     else:
         x = str(x)
         y = str(y)
-        # print(x[:2])
 
         n = max(len(x),len(y))
         n2 =int(n/2)
-        # print(n2)
-        Xhi = int(x[:n2])
-        Xlo = int(x[n2:])
-        Yhi = int(y[:n2])
-        Ylo = int(y[n2:])
-        print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
-        Z = karatsuba(Xhi,Yhi)*(10**n) + (karatsuba(Xhi,Ylo) + karatsuba(Xlo,Yhi))*(10**n2) + karatsuba(Xlo,Ylo)
+
+        Xhi = int(x)// 10**(n2)
+        Xlo = int(x) - Xhi * 10**n2
+        Yhi = int(y)//10**n2
+        Ylo = int(y) - Yhi * 10**n2
+        # print(f'Xhigh: {Xhi} Xlow: {Xlo} Yhigh: {Yhi} Ylow: {Ylo}')
+        Z = (karatsuba(Xhi, Yhi) * (10 ** ((n2) * 2)) + (karatsuba(Xhi, Ylo) + karatsuba(Xlo, Yhi)) * (10 ** n2) + karatsuba(
+            Xlo, Ylo))
 
         return Z
 
@@ -26,7 +32,7 @@ def Ext_eucl(a,b):
     if a == 0:
         return (0, 1, b)
 
-    x1, y1, gcd = Ext_eucl(b % a, a)
+    x1, y1, gcd = Ext_eucl(getRemainder(b,a), a)
 
     x = y1 - (b // a) * x1
     y = x1

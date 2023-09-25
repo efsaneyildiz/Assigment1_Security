@@ -1,3 +1,6 @@
+from integer_arithmetic import karatsuba
+
+
 def getRemainder(num: str, divisor: str)->int:
     q = int(num)//int(divisor)
     result = int(num) - int(divisor)*int(q)
