@@ -209,13 +209,13 @@ def addition_and_subtraction(X: str,Y: str, type: str):
     Y = Y.zfill(max_len)
     if type =='addition':
         if negative_x and negative_y:
-            return f'-{addition(X, Y)}'
+            return f'-{addition(X, Y)}'  # (-x) + (-y)
         elif negative_x:
-            return f'-{subtract(X,Y)}'
+            return f'-{subtract(X,Y)}'   # (-x) + (y)
         elif negative_y:
-            return subtract(X,Y)
+            return subtract(X,Y)         # (x) + (-y)
         else:
-            return addition(X,Y)
+            return addition(X,Y)         # (x) + (y)
     if type == 'subtraction':
         if negative_x and negative_y:  # (-x) - (-y)
             return f'-{subtract(X,Y)}'

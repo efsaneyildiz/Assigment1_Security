@@ -22,7 +22,6 @@ def to_decimal(number: str, radix)->str:
 
 
 
-
 def to_radix(n: int, radix: int) -> str:
     hex_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"[:radix]
 
